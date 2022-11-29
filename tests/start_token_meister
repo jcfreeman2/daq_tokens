@@ -1,0 +1,11 @@
+#!/bin/bash
+set -e
+mkdir -p keys
+cd keys
+openssl genrsa -out private.pem
+openssl rsa -in private.pem -pubout -out public.pem -outform PEM
+token=/tmp/token-test
+mkdir -p ${token}
+../token_meister private.pem ${token}/token_meister > /dev/null 2> start_token_meister.err < /dev/null &
+echo $! > pid
+disown -h %1

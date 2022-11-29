@@ -1,0 +1,7 @@
+#!/usr/bin/env python
+#
+# Acquire a DAQ JWT token and print it to stdout.
+#
+from daq_tokens import acquire
+print(acquire(),end='')
+

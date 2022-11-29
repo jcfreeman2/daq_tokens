@@ -1,0 +1,6 @@
+#!/bin/bash
+#
+# The definition of our fingerprint.
+# Stdin is supposed to contain the key in PEM format.
+#
+/usr/bin/openssl rsa -pubout -outform DER $@ 2> /dev/null | /usr/bin/openssl md5 | /usr/bin/cut -d' ' -f2

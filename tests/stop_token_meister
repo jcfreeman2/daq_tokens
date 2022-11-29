@@ -1,0 +1,4 @@
+#!/bin/bash
+kill $(cat keys/pid)
+rm -rf keys
+rm -rf /tmp/token-test/

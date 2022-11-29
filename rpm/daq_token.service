@@ -1,0 +1,8 @@
+[Unit]
+Description=The JWT tokenmeister service
+
+Requires=daq_token.socket
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/token_meister /etc/daq_token/private.key

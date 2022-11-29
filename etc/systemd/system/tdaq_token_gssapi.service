@@ -1,0 +1,15 @@
+[Unit]
+Description=The JWT tokenmeister service for GSSAPI
+
+Requires=tdaq_token_gssapi.socket
+
+[Service]
+Type=simple
+
+Environment=KRB5_KTNAME=FILE:/etc/atdtoken/token.keytab
+
+ExecStartPre=/bin/bash -c "klist -k | grep -q atdaqjwt"
+ExecStart=/usr/bin/token_meister --hash=md5 --gssapi /etc/atdtoken/private.key
+
+[Install]
+WantedBy=multi-user.target

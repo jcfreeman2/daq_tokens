@@ -1,0 +1,9 @@
+[Unit]
+Description=The JWT tokenmeister service
+
+Requires=tdaq_token.socket
+
+[Service]
+Type=simple
+User=tdaqsw
+ExecStart=/usr/bin/token_meister --hash=md5 --local ~/keys/private.key

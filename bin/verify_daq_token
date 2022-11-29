@@ -1,0 +1,30 @@
+#!/usr/bin/env python3
+"""
+Verify a DAQ JWT token and print it
+to stdout.
+
+verify_daq_token [ <token> | -f <path> ]
+
+  <token> is the encoded JWT. It can be passed explicitly
+           or piped in via stdin.
+  -f <path> the token is read from <path>
+"""
+
+import sys
+import json
+from daq_tokens import verify
+
+
+if len(sys.argv) > 1:
+    token = sys.argv[1]
+    if token == '-f':
+        with open(sys.argv[2]) as f:
+            token = f.readline().strip()
+else:
+    token = sys.stdin.readline().strip()
+
+try:
+  print(json.dumps(verify(token),indent=2))
+except Exception as ex:
+  print(ex, file=sys.stderr)
+  sys.exit(1)

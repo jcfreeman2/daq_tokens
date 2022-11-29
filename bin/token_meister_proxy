@@ -1,0 +1,18 @@
+#!/bin/bash
+case "$1" in
+  -h|--help)
+    echo "usage: $0 [-h|--help] [ <path ]"
+    echo "   Run local token_meister proxy on <path>."
+    echo "   Default path is: ${XDG_RUNTIME_DIR:-/tmp/${USER}}/tdaq_token "
+    exit 0
+    ;;
+  -*)
+    echo "Unkown option: $1"
+    exit 1
+    ;;
+esac
+socketpath=${1:-${XDG_RUNTIME_DIR:-/tmp/${USER}}/tdaq_token}
+echo $socketpath
+rm -f $socketpath || { echo "Cannot remove $socketpath" >&2 ; exit 1; }
+export TDAQ_TOKEN_ACQUIRE=gssapi
+nc -Ulk $socketpath -c get_daq_token

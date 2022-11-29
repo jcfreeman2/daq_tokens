@@ -1,0 +1,5 @@
+[Unit]
+Description=The JWT token meister socket.
+
+[Socket]
+ListenStream=%t/daq_token

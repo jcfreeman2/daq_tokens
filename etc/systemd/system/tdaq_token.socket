@@ -1,0 +1,6 @@
+[Unit]
+Description=The JWT token meister socket.
+
+[Socket]
+SocketUser=tdaqsw
+ListenStream=%t/tdaq_token
